@@ -1,7 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <title>音楽再生</title>
+  <style>
+
+    body{
+      display: inline-flex;
+      flex-wrap: wrap;
+    }
+
+    /* ボタンのスタイル */
+    button {
+
+      padding: 10px;
+
+      width: 30%;
+      height: 30vw;
+
+      font-size: 16px;
+      transition: background-color 0.5s ease; /* 色の変化を滑らかにする */
+    }
+
+    button.mute{
+      background-color: #f0f0f0;
+    }
+
+    /* 再生中のボタンのスタイル */
+    button.playing {
+      background-color: rgb(255, 136, 0); /* 再生中の色 */
+    }
+
+    button.stop_button{
+      background-color: red;
+    }
+
+  </style>
 </head>
 <body>
 
@@ -20,25 +56,109 @@
   Your browser does not support the audio element.
 </audio>
 
-<button onclick="playAudio('audio1')">音声1を再生</button>
-<button onclick="playAudio('audio2')">音声2を再生</button>
-<button onclick="playAudio('audio3')">音声3を再生</button>
-<button onclick="stopAudio()">音声を停止</button>
+<audio id="audio4">
+  <source src="音声ファイル/爆発3.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio5">
+  <source src="音声ファイル/爆発4.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio6">
+  <source src="音声ファイル/大砲1.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio7">
+  <source src="音声ファイル\ショットガン発射.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio8">
+  <source src="音声ファイル/拳銃を撃つ.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio9">
+  <source src="音声ファイル/狙撃銃発射.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio10">
+  <source src="音声ファイル\ショットガン発射.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio11">
+  <source src="音声ファイル/拳銃を撃つ.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio12">
+  <source src="音声ファイル/狙撃銃発射.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio13">
+  <source src="音声ファイル/大型狙撃銃を発射.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio14">
+  <source src="音声ファイル/大型狙撃銃を発射.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+
+<button class="mute" onclick="playAudio('audio1', this)">大爆発1</button>
+<button class="mute" onclick="playAudio('audio2', this)">大爆発2(ガラス割れる)</button>
+<button class="mute" onclick="playAudio('audio3', this)">爆発1</button>
+<button class="mute" onclick="playAudio('audio4', this)">爆発2</button>
+<button class="mute" onclick="playAudio('audio5', this)">爆発3</button>
+<button class="mute" onclick="playAudio('audio6', this)">大砲</button>
+<button class="mute" onclick="playAudio('audio7', this)">銃1</button>
+<button class="mute" onclick="playAudio('audio8', this)">銃2</button>
+<button class="mute" onclick="playAudio('audio9', this)">銃3</button>
+<button class="mute" onclick="playAudio('audio10', this)">銃1</button>
+<button class="mute" onclick="playAudio('audio11', this)">銃2</button>
+<button class="mute" onclick="playAudio('audio12', this)">銃3</button>
+<button class="mute" onclick="playAudio('audio13', this)">銃4</button>
+<button class="mute" onclick="playAudio('audio14', this)">銃4</button>
+<button class="stop_button" onclick="stopAudio()">音声を停止</button>
 
 <script>
 var audioElements = document.querySelectorAll('audio');
 
-function playAudio(audioId) {
+function playAudio(audioId, button) {
   var audio = document.getElementById(audioId);
   audio.pause();
   audio.currentTime = 0;
   audio.play();
+
+  // 再生中のボタンにクラスを追加
+  button.classList.remove('mute');
+  button.classList.add('playing');
+
+  // 音声が終了したらクラスを削除
+  audio.addEventListener('ended', function() {
+    button.classList.remove('playing');
+    button.classList.add('mute');
+  });
 }
 
 function stopAudio() {
   audioElements.forEach(function(audio) {
     audio.pause();
     audio.currentTime = 0;
+  });
+
+  // 全てのボタンから再生中のクラスを削除
+  var buttons = document.querySelectorAll('button');
+  buttons.forEach(function(button) {
+    button.classList.remove('playing');
+    button.classList.add('mute');
   });
 }
 </script>
