@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>音楽再生</title>
+</head>
+<body>
+
+<audio id="audio1">
+  <source src="音声ファイル/大爆発1.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio2">
+  <source src="音声ファイル/大爆発2.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="audio3">
+  <source src="音声ファイル/爆発2.mp3" type="audio/mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<button onclick="playAudio('audio1')">音声1を再生</button>
+<button onclick="playAudio('audio2')">音声2を再生</button>
+<button onclick="playAudio('audio3')">音声3を再生</button>
+<button onclick="stopAudio()">音声を停止</button>
+
+<script>
+var audioElements = document.querySelectorAll('audio');
+
+function playAudio(audioId) {
+  var audio = document.getElementById(audioId);
+  audio.pause();
+  audio.currentTime = 0;
+  audio.play();
+}
+
+function stopAudio() {
+  audioElements.forEach(function(audio) {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+}
+</script>
+
+</body>
+</html>
